@@ -5,6 +5,6 @@ import com.casic.mybatisplusdemo.entity.User;
 import org.springframework.stereotype.Component;
 
 @Component
-public interface UserMapper extends BaseMa   pper<User> {
+public interface UserMapper extends BaseMapper<User> {
 
 }
