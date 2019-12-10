@@ -1,9 +1,6 @@
 package com.casic.mybatisplusdemo.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
 import java.util.Date;
@@ -21,4 +18,8 @@ public class User {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;//在修改数据的时候填充修改时间
 
+    //乐观锁版本号
+    @Version
+    @TableField(fill =FieldFill.INSERT)
+    private Integer version;
 }

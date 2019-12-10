@@ -21,15 +21,28 @@ public class MybatisplusdemoApplicationTests {
     public void testGetAllUser() {
         System.out.println(userMapper.selectList(null));
     }
-/**
+
+    /**
+     * 测试乐观锁
+     */
+    @Test
+    public void testOptimisticLocker(){
+        User user = userMapper.selectById(1204225388305039362L);
+        user.setName("东方不败");
+        int i = userMapper.updateById(user);
+        System.out.println(i);
+    }
+
+
+    /**
  * 添加用户
  */
     @Test
     public void testAddUser(){
         User user=new User();
         user.setAge(99);
-        user.setName("薛振春");
-        user.setEmail("tom@qq.com");
+        user.setName("周玲");
+        user.setEmail("周周@qq.com");
         int rows=userMapper.insert(user);
         System.out.println(rows);
     }
