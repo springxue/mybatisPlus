@@ -22,4 +22,8 @@ public class User {
     @Version
     @TableField(fill =FieldFill.INSERT)
     private Integer version;
+
+    @TableLogic//用于做逻辑删除的注解
+    @TableField(fill = FieldFill.INSERT)
+    private Integer deleted;
 }

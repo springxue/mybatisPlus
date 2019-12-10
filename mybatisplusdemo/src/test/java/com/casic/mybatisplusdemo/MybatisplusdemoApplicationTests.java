@@ -1,5 +1,7 @@
 package com.casic.mybatisplusdemo;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.injector.methods.LogicDelete;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.casic.mybatisplusdemo.entity.User;
 import com.casic.mybatisplusdemo.mapper.UserMapper;
@@ -20,6 +22,57 @@ public class MybatisplusdemoApplicationTests {
     @Autowired
     UserMapper userMapper;
 
+    /**
+     * 查询年龄大于80的用户
+     */
+    @Test
+    public void testSelectDemo(){
+        //1构造条件
+        QueryWrapper<User> wrapper=new QueryWrapper<>();
+        //age>80
+        wrapper.gt("age",80);
+        List<User> users = userMapper.selectList(wrapper);
+        System.out.println(users);
+        //并且name=周玲，多个查询条件只要一直用wrapper.就可以添加多个
+        wrapper.eq("name","周玲");
+        List<User> users1 = userMapper.selectList(wrapper);
+        System.out.println(users1);
+
+    }
+    /**
+     * 查询年龄介于30到80的用户
+     */
+    @Test
+    public void testSelectDemo2(){
+        //1构造条件
+        QueryWrapper<User> wrapper=new QueryWrapper<>();
+        //age>30   age<80
+        wrapper.between("age",30,80);
+        List<User> users = userMapper.selectList(wrapper);
+        System.out.println(users);
+    }
+
+    /**
+     * 模糊查询
+     */
+    @Test
+    public void testSelectDemo3(){
+        //1构造条件
+        QueryWrapper<User> wrapper=new QueryWrapper<>();
+        //age>30   age<80
+        wrapper.like("name","j");
+        List<User> users = userMapper.selectList(wrapper);
+        System.out.println(users);
+    }
+    
+
+    /**
+ * 逻辑删除
+ */
+@Test
+    public void testLogicDelete(){
+        userMapper.deleteById(1204386532685123585L);
+    }
     /**
      * 查询所有用户
      */
@@ -88,7 +141,7 @@ public class MybatisplusdemoApplicationTests {
     public void testAddUser(){
         User user=new User();
         user.setAge(99);
-        user.setName("周玲");
+        user.setName("乔峰");
         user.setEmail("周周@qq.com");
         int rows=userMapper.insert(user);
         System.out.println(rows);
